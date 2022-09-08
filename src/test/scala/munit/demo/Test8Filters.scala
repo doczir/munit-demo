@@ -17,7 +17,7 @@ class Test8Filters extends FunSuite {
 
   // pass `--exclude-tags=IntegrationTest" to skip
   val IntegrationTest = new Tag("IntegrationTest")
-  test("it".tag(IntegrationTest)) {
+  test("the slow and painful integration test".tag(IntegrationTest)) {
     println("IT Test!")
     assert(true == true)
   }

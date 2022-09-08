@@ -11,10 +11,9 @@ class Test6Assertions extends FunSuite {
   }
 
   test("Simple assert with more clues") {
-    val a = List(true)
-    val b = false
+    val values = Set(1, 2, 3, 4)
 
-    assert(clue(a.head) == clue(b))
+    assert(clue(values).contains(5))
   }
 
   test("assertEquals case class") {
@@ -47,9 +46,11 @@ class Test6Assertions extends FunSuite {
   }
 
   test("assert exception") {
-    interceptMessage[IllegalStateException]("something's not quite right") {
+    val ex = interceptMessage[IllegalStateException]("something's not quite right") {
       throw new IllegalStateException("something's not quite right")
     }
+
+    assert(ex ne null)
   }
 
 }

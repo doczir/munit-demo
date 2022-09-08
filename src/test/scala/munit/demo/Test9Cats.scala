@@ -1,9 +1,9 @@
 package munit.demo
 
-import cats.effect.{IO, Resource, ResourceIO}
+import cats.effect.{IO, Resource, ResourceIO, SyncIO}
 import munit.CatsEffectSuite
 
-import java.nio.file.Files
+import java.nio.file.{Files, Path}
 
 /** Cats
   */
@@ -22,7 +22,7 @@ class Test9Cats extends CatsEffectSuite {
     } yield ()
   }
 
-  val suiteLocalFileFixture = ResourceSuiteLocalFixture(
+  val suiteLocalFileFixture: Fixture[Path] = ResourceSuiteLocalFixture(
     "file",
     Resource.make(IO(Files.createTempFile("Test9", "SuiteLocal")))(file =>
       IO(Files.deleteIfExists(file))
@@ -49,7 +49,7 @@ class Test9Cats extends CatsEffectSuite {
     } yield ()
   }
 
-  val testLocalFileFixture = ResourceFixture(
+  val testLocalFileFixture: SyncIO[FunFixture[Path]] = ResourceFixture(
     Resource.make(IO(Files.createTempFile("Test9", "TestLocal")))(file =>
       IO(Files.deleteIfExists(file))
     )
